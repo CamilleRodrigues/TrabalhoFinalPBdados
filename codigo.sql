@@ -179,14 +179,14 @@ VALUES ('Camille ', 65.0, '1,65', 60.0, 23, '02/06/2025', '02/10/2025', 'Emagrec
 
 -- 7. Crie uma consulta para relacionar todos os dados disponíveis de todos os Alunos/Clientes da academia em ordem alfabética de nome.
 
-SELECT *
-FROM ALUNO
-ORDER BY NOME ASC;
+SELECT * -- Seleciona todas as colunas da tabela.
+FROM ALUNO -- os dados irão vir da tabela ALUNO.
+ORDER BY NOME ASC; -- Ordena os resultados da coluna NOME e coloca em ordem crescente.
 
 -- 9. Crie uma consulta para listar todas as avaliações físicas de alunos realizadas, ordenadas por data de avaliação. 
 
 SELECT 
-    A.NOME AS Nome_Aluno,
+    A.NOME AS Nome_Aluno, -- renomeia a coluna NOME da tabela ALUNO para Nome_Aluno
     AV.ID_AVALIACAO,
     AV.DATA_AVALIACAO,
     AV.AQUECIMENTO,
