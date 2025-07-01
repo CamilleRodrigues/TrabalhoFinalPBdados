@@ -1,11 +1,11 @@
 -- 4. Crie o comando SQL para a criação do banco de dados ACADEMIA.
 
-CREATE DATABASE ACADEMIA;
+CREATE DATABASE ACADEMIA; -- Criação do banco de dados ACADEMIA.
 USE ACADEMIA;
 
 -- 5. Crie o comando SQL para a criação das tabelas solicitadas (exercícios, alunos, avaliações, frequência). 
 
-CREATE TABLE "AVALIACOES_FISICAS" (
+CREATE TABLE "AVALIACOES_FISICAS" ( -- Criação da tabela avaliaçõs fisicas
 	"ID_AVALIACAO"	INTEGER NOT NULL,
 	"ID_ALUNO"	INTEGER NOT NULL,
 	"DATA_AVALIACAO"	NUMERIC NOT NULL,
@@ -18,8 +18,8 @@ CREATE TABLE "AVALIACOES_FISICAS" (
 	"COND_TEMP_OUT"	REAL NOT NULL,
 	"COND_VEL_OUT"	REAL NOT NULL,
 	"CONTROLE_FREQ_DIAS"	INTEGER NOT NULL,
-	PRIMARY KEY("ID_AVALIACAO"),
-	FOREIGN KEY("ID_ALUNO") REFERENCES "ALUNO"("ID_ALUNO"));
+	PRIMARY KEY("ID_AVALIACAO"), -- Define ID_AVALIACAO como a chave primária, valor único que identifica cada registro
+	FOREIGN KEY("ID_ALUNO") REFERENCES "ALUNO"("ID_ALUNO")); -- ID_ALUNO está relacionado à tabela ALUNO. 
 
 CREATE TABLE "PERSONAL" (
 	"NOME"	TEXT NOT NULL,
@@ -186,7 +186,7 @@ ORDER BY NOME ASC; -- Ordena os resultados da coluna NOME e coloca em ordem cres
 -- 9. Crie uma consulta para listar todas as avaliações físicas de alunos realizadas, ordenadas por data de avaliação. 
 
 SELECT 
-    A.NOME AS Nome_Aluno, -- renomeia a coluna NOME da tabela ALUNO para Nome_Aluno
+    A.NOME, 
     AV.ID_AVALIACAO,
     AV.DATA_AVALIACAO,
     AV.AQUECIMENTO,
@@ -198,21 +198,21 @@ SELECT
     AV.COND_TEMP_OUT,
     AV.COND_VEL_OUT,
     AV.CONTROLE_FREQ_DIAS
-FROM AVALIACOES_FISICAS AV
-JOIN ALUNO A ON AV.ID_ALUNO = A.ID_ALUNO
-ORDER BY AV.DATA_AVALIACAO ASC;
+FROM AVALIACOES_FISICAS AS AV -- A consulta está sendo feita na tabela AVALIACOES_FISICAS, a sigla AV (abreviação de AVALIACOES_FISICAS) serve para dizer que as colunos estão associadas a essa tabela.
+JOIN ALUNO AS A ON AV.ID_ALUNO = A.ID_ALUNO -- Faz uma junção entre as tabelas AVALIACOES_FISICAS e ALUNO, com base na coluna ID_ALUNO, que existe nas duas tabelas.
+ORDER BY AV.DATA_AVALIACAO ASC; -- Ordena os resultados pela data da avaliação física, da mais antiga para a mais recente.
 
 -- 10. Crie uma consulta para listar todos os alunos cadastrados, juntamente com seus objetivos de treino, a quantidade total de exercícios realizados e o nome do personal responsável, 
-ordenados alfabeticamente pelo nome do aluno. 
+-- ordenados alfabeticamente pelo nome do aluno. 
 
 SELECT 
-    A.NOME AS Nome_Aluno,
-    A.OBJETIVO,
-    COUNT(E.NOME_EXERCICIO) AS Total_Exercicios,
-    P.NOME AS Nome_Personal
-FROM ALUNO A
-LEFT JOIN PERSONAL P ON A.ID_PERSONAL = P.ID_PERSONAL
-LEFT JOIN TREINOS T ON A.ID_TREINO = T.ID_TREINO
-LEFT JOIN EXERCICIOS E ON T.ID_GRUPO_MUSC = E.ID_GRUPO_MUSC
-GROUP BY A.ID_ALUNO, A.NOME, A.OBJETIVO, P.NOME
-ORDER BY A.NOME ASC;
+    A.NOME, -- Seleciona o nome do aluno da tabela "ALUNO"
+    A.OBJETIVO, -- Seleciona o objetivo do aluno da tabela "ALUNO"
+    COUNT(E.NOME_EXERCICIO), -- Conta quantos valores não nulos existem na coluna E.NOME_EXERCICIO da tabela "EXERCICIOS".
+    P.NOME -- Seleciona o nome do personal trainer associado ao aluno da tabela "PERSONAL".
+FROM ALUNO AS A -- Define a tabela ALUNO como A
+LEFT JOIN PERSONAL AS P ON A.ID_PERSONAL = P.ID_PERSONAL -- Para cada aluno, tenta encontrar o personal correspondente. Usamos a chave estrangeira "ID_PERSONAL" para fazer essa ligação.
+LEFT JOIN TREINOS AS T ON A.ID_TREINO = T.ID_TREINO -- Junta a tabela de exercícios, pegando os exercícios relacionados ao grupo muscular do treino do aluno.
+LEFT JOIN EXERCICIOS AS E ON T.ID_GRUPO_MUSC = E.ID_GRUPO_MUSC -- Conecta a tabela TREINOS com a tabela EXERCICIOS, usando como chave de ligação o campo ID_GRUPO_MUSC.
+GROUP BY A.ID_ALUNO, A.NOME, A.OBJETIVO, P.NOME -- Agrupa os dados por aluno e personal para que o COUNT funcione corretamente (sem duplicar resultados).
+ORDER BY A.NOME ASC; -- Ordena os resultados pelo nome do aluno em ordem alfabética.
