@@ -1,3 +1,5 @@
+-- O seguinte trabalho foi realizado pelas alunas Camille Rodrigues e Luizy Pruss
+
 -- As ferramentas que utilizamos foi o SQLite e DBeaver.
 -- Começamos a criação de tabelas pelo SQLite, 
 -- depois fizemos a conexão do SQLite com o DBeaver para poder continuar o desenvolvimento do trabalho com o que já tinha sido desenvolvido.
