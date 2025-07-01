@@ -1,3 +1,7 @@
+-- As ferramentas que utilizamos foi o SQLite e DBeaver.
+-- Começamos a criação de tabelas pelo SQLite, 
+-- depois fizemos a conexão do SQLite com o DBeaver para poder continuar o desenvolvimento do trabalho com o que já tinha sido desenvolvido.
+
 -- 4. Crie o comando SQL para a criação do banco de dados ACADEMIA.
 
 CREATE DATABASE ACADEMIA; -- Criação do banco de dados ACADEMIA.
