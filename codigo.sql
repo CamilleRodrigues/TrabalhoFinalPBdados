@@ -244,7 +244,7 @@ ORDER BY AV.DATA_AVALIACAO ASC; -- Ordena os resultados pela data da avaliação
 SELECT 
     A.NOME, -- Seleciona o nome do aluno da tabela "ALUNO"
     A.OBJETIVO, -- Seleciona o objetivo do aluno da tabela "ALUNO"
-    COUNT(E.NOME_EXERCICIO), -- Conta quantos valores não nulos existem na coluna E.NOME_EXERCICIO da tabela "EXERCICIOS".
+    ID_TREINO, 
     P.NOME -- Seleciona o nome do personal trainer associado ao aluno da tabela "PERSONAL".
 FROM ALUNO AS A -- Define a tabela ALUNO como A
 LEFT JOIN PERSONAL AS P ON A.ID_PERSONAL = P.ID_PERSONAL -- Para cada aluno, tenta encontrar o personal correspondente. Usamos a chave estrangeira "ID_PERSONAL" para fazer essa ligação.
