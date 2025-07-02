@@ -11,57 +11,57 @@
 -- 5. Crie o comando SQL para a criação das tabelas solicitadas (exercícios, alunos, avaliações, frequência). 
 
 CREATE TABLE "PERSONAL" ( -- Criação da tabela "PERSONAL".
-	"NOME"	TEXT NOT NULL, -- Nome da coluna, tipo de dado e restrição.
-	"ID_PERSONAL"	INTEGER NOT NULL,
+	"NOME" TEXT NOT NULL, -- Nome da coluna, tipo de dado e restrição.
+	"ID_PERSONAL" INTEGER NOT NULL,
 	PRIMARY KEY("ID_PERSONAL")); -- Define ID_PERSONAL como a chave primária.
 
 CREATE TABLE "EXERCICIOS" ( -- Criação da tabela "EXERCICIOS"
 	"NOME_EXERCICIO" TEXT NOT NULL, -- Nome da coluna, tipo de dado e restrição.
-	"ID_GRUPO_MUSC"	INTEGER NOT NULL,
-	"GRUPO_MUSC"	 TEXT NOT NULL,
+	"ID_GRUPO_MUSC" INTEGER NOT NULL,
+	"GRUPO_MUSC" TEXT NOT NULL,
 	"ORDEM"	INTEGER NOT NULL,
-	"SERIES"	INTEGER NOT NULL,
-	"REPETICOES"	INTEGER NOT NULL,
+	"SERIES" INTEGER NOT NULL,
+	"REPETICOES" INTEGER NOT NULL,
 	PRIMARY KEY("ID_GRUPO_MUSC")); -- Define ID_GRUPO_MUSC como a chave primária.
 
 CREATE TABLE "TREINOS" ( -- Criação da tabela "TREINOS"
-	"ID_TREINO"	INTEGER NOT NULL, -- Nome da coluna, tipo de dado e restrição.
-	"ID_GRUPO_MUSC"	INTEGER NOT NULL,
+	"ID_TREINO" INTEGER NOT NULL, -- Nome da coluna, tipo de dado e restrição.
+	"ID_GRUPO_MUSC" INTEGER NOT NULL,
 	PRIMARY KEY("ID_TREINO"), -- Define ID_TREINO como a chave primária.
 	FOREIGN KEY("ID_GRUPO_MUSC") REFERENCES "EXERCICIOS"("ID_GRUPO_MUSC")); -- ID_GRUPO_MUSC está relacionado à tabela EXERCICIOS.
 
 CREATE TABLE "ALUNO" ( -- Criação da tabela "ALUNO"
-	"NOME"	TEXT NOT NULL, -- Nome da coluna, tipo de dado e restrição
-	"PESO"	REAL NOT NULL,
-	"ALTURA"	REAL NOT NULL,
-	"PESO_META"	REAL NOT NULL,
+	"NOME" TEXT NOT NULL, -- Nome da coluna, tipo de dado e restrição
+	"PESO" REAL NOT NULL,
+	"ALTURA" REAL NOT NULL,
+	"PESO_META" REAL NOT NULL,
 	"IDADE"	INTEGER NOT NULL,
-	"DATA_INICIAL"	TEXT NOT NULL,
-	"DATA_FINAL"	TEXT NOT NULL,
-	"OBJETIVO"	TEXT NOT NULL,
-	"OBSERVACOES"	TEXT NOT NULL,
-	"FREQUENCIA_TREINOS"	 TEXT NOT NULL,
-	"ID_ALUNO"	INTEGER NOT NULL,
-	"DURACAO_PLANEJAMENTO"	TEXT NOT NULL,
-	"ID_PERSONAL"	INTEGER NOT NULL,
-	"ID_TREINO"	INTEGER,
+	"DATA_INICIAL" TEXT NOT NULL,
+	"DATA_FINAL" TEXT NOT NULL,
+	"OBJETIVO" TEXT NOT NULL,
+	"OBSERVACOES" TEXT NOT NULL,
+	"FREQUENCIA_TREINOS" TEXT NOT NULL,
+	"ID_ALUNO" INTEGER NOT NULL,
+	"DURACAO_PLANEJAMENTO" TEXT NOT NULL,
+	"ID_PERSONAL" INTEGER NOT NULL,
+	"ID_TREINO" INTEGER,
 	PRIMARY KEY("ID_ALUNO"), -- Define ID_ALUNO como a chave primária.
 	FOREIGN KEY("ID_PERSONAL") REFERENCES "PERSONAL"("ID_PERSONAL"), -- ID_PERSONAL está relacionado à tabela PERSONAL.  
 	FOREIGN KEY("ID_TREINO") REFERENCES "TREINOS"("ID_TREINO")); -- ID_TREINO está relacionado à tabela TREINO.  
 
 CREATE TABLE "AVALIACOES_FISICAS" ( -- Criação da tabela "AVALIACOES_FISICAS"
-	"ID_AVALIACAO"	INTEGER NOT NULL, -- Nome da coluna, tipo de dado e restrição
-	"ID_ALUNO"	INTEGER NOT NULL,
+	"ID_AVALIACAO" INTEGER NOT NULL, -- Nome da coluna, tipo de dado e restrição
+	"ID_ALUNO" INTEGER NOT NULL,
 	"DATA_AVALIACAO" TEXT NOT NULL,
-	"AQUECIMENTO"	TEXT NOT NULL,
-	"PAUSA_SERIES"	REAL NOT NULL,
-	"COND_TEMP_BIC"	REAL NOT NULL,
-	"COND_VEL_BIC"	REAL NOT NULL,
-	"COND_TEMP_EST"	REAL NOT NULL,
-	"COND_VEL_EST"	REAL NOT NULL,
-	"COND_TEMP_OUT"	REAL NOT NULL,
-	"COND_VEL_OUT"	REAL NOT NULL,
-	"CONTROLE_FREQ_DIAS"	INTEGER NOT NULL,
+	"AQUECIMENTO" TEXT NOT NULL,
+	"PAUSA_SERIES" TEXT NOT NULL,
+	"COND_TEMP_BIC" TEXT NOT NULL,
+	"COND_VEL_BIC" TEXT NOT NULL,
+	"COND_TEMP_EST"	TEXT NOT NULL,
+	"COND_VEL_EST" TEXT NOT NULL,
+	"COND_TEMP_OUT" TEXT NOT NULL,
+	"COND_VEL_OUT" TEXT NOT NULL,
+	"CONTROLE_FREQ_DIAS" INTEGER NOT NULL,
 	PRIMARY KEY("ID_AVALIACAO"), -- Define ID_AVALIACAO como a chave primária.
 	FOREIGN KEY("ID_ALUNO") REFERENCES "ALUNO"("ID_ALUNO")); -- ID_ALUNO está relacionado à tabela ALUNO.  
 
@@ -159,28 +159,28 @@ VALUES (21, 1),
        (30, 3);
 
 INSERT INTO ALUNO (NOME, PESO, ALTURA, PESO_META, IDADE, DATA_INICIAL, DATA_FINAL, OBJETIVO, OBSERVACOES, FREQUENCIA_TREINOS, ID_ALUNO, DURACAO_PLANEJAMENTO, ID_PERSONAL, ID_TREINO) 
-VALUES ('Camille ', 65.0, '1.65', 60.0, 23, '02/06/2025', '02/10/2025', 'Emagrecimento', 'Fazendo acompanhamento com nutricionista', '3 vezes por semana', 1, '2 meses', 16, 21),
-       ('Luizy ', 53.0, '1.55', 58.0, 27, '03/06/2025', '03/10/2025', 'Ganho de massa muscular', 'Comem mais calorias do que gastam', '4 vezes por semana', 2, '2 meses', 20, 22),
-       ('Marlon ', 80.0, '1.75', 75.0, 31, '04/06/2025', '04/10/2025', 'Emagrecimento', 'Fazendo acompanhamento com nutricionista', '6 vezes por semana', 3, '3 meses', 11, 23),
-       ('Ramon ', 73.0, '1.73', 80.0, 26, '05/06/2025', '05/10/2025', 'Ganho de massa muscular', 'Comem mais calorias do que gastam', '5 vezes por semana', 4, '3 meses', 15, 24),
-       ('Diogo ', 98.0, '1.68', 70.0, 24, '06/06/2025', '06/10/2025', 'Emagrecimento', 'Fazendo acompanhamento com nutricionista', '7 vezes por semana', 5, '6 meses', 18, 25),
-       ('Camila', 68.0, '1.53', 65.0, 55, '07/06/2025', '07/10/2025', 'Emagrecimento', 'Fazendo acompanhamento com nutricionista', '3 vezes por semana ', 6, '2 meses', 12, 26),
-       ('Franciele', 55.0, '1.62', 60.0, 24, '08/06/2025', '08/10/2025', 'Ganho de massa muscular', 'Comem mais calorias do que gastam', '4 vezes por semana ', 7, '3 meses', 17, 27),
-       ('Marcos', 70.0, '1.70', 70.0, 55, '09/06/2025', '09/10/2025', 'Manter o peso', '-', '2 vezes por semana ', 8, '4 meses', 19, 28),
-       ('Leonardo', 70.0, '1.72', 75.0, 23, '10/06/2025', '10/10/2025', 'Ganho de massa muscular', 'Comem mais calorias do que gastam', '6 vezes por semana', 9, '3 meses', 13, 29), 
-       ('Ana Paula', 52.0, '1.50', 57.0, 23, '11/06/2025', '11/10/2025', 'Ganho de massa muscular', 'Comem mais calorias do que gastam', '5 vezes por semana', 10, '3 meses', 14, 30);
+VALUES ('Camille ', 65.0, 1.65, 60.0, 23, '02/06/2025', '02/10/2025', 'Emagrecimento', 'Fazendo acompanhamento com nutricionista', '3 vezes por semana', 1, '2 meses', 16, 21),
+       ('Luizy ', 53.0, 1.55, 58.0, 27, '03/06/2025', '03/10/2025', 'Ganho de massa muscular', 'Comem mais calorias do que gastam', '4 vezes por semana', 2, '2 meses', 20, 22),
+       ('Marlon ', 80.0, 1.75, 75.0, 31, '04/06/2025', '04/10/2025', 'Emagrecimento', 'Fazendo acompanhamento com nutricionista', '6 vezes por semana', 3, '3 meses', 11, 23),
+       ('Ramon ', 73.0, 1.73, 80.0, 26, '05/06/2025', '05/10/2025', 'Ganho de massa muscular', 'Comem mais calorias do que gastam', '5 vezes por semana', 4, '3 meses', 15, 24),
+       ('Diogo ', 98.0, 1.68, 70.0, 24, '06/06/2025', '06/10/2025', 'Emagrecimento', 'Fazendo acompanhamento com nutricionista', '7 vezes por semana', 5, '6 meses', 18, 25),
+       ('Camila', 68.0, 1.53, 65.0, 55, '07/06/2025', '07/10/2025', 'Emagrecimento', 'Fazendo acompanhamento com nutricionista', '3 vezes por semana ', 6, '2 meses', 12, 26),
+       ('Franciele', 55.0, 1.62, 60.0, 24, '08/06/2025', '08/10/2025', 'Ganho de massa muscular', 'Comem mais calorias do que gastam', '4 vezes por semana ', 7, '3 meses', 17, 27),
+       ('Marcos', 70.0, 1.70, 70.0, 55, '09/06/2025', '09/10/2025', 'Manter o peso', '-', '2 vezes por semana ', 8, '4 meses', 19, 28),
+       ('Leonardo', 70.0, 1.72, 75.0, 23, '10/06/2025', '10/10/2025', 'Ganho de massa muscular', 'Comem mais calorias do que gastam', '6 vezes por semana', 9, '3 meses', 13, 29), 
+       ('Ana Paula', 52.0, 1.50, 57.0, 23, '11/06/2025', '11/10/2025', 'Ganho de massa muscular', 'Comem mais calorias do que gastam', '5 vezes por semana', 10, '3 meses', 14, 30);
 
 INSERT INTO AVALIACOES_FISICAS (ID_AVALIACAO, ID_ALUNO, DATA_AVALIACAO, AQUECIMENTO, PAUSA_SERIES, COND_TEMP_BIC, COND_VEL_BIC, COND_TEMP_EST, COND_VEL_EST, COND_TEMP_OUT, COND_VEL_OUT, CONTROLE_FREQ_DIAS)
-VALUES (123, 1, '01/06/2025', 'BICICLETA', '1:00', '20:00', '15 km/h', '00:00', 0.0, 0.0, 0.0, 102),
-       (213, 7, '07/06/2025', 'BICICLETA', '1:00', '20:00', '15 km/h', '00:00', 0.0, 0.0, 0.0, 90),
-       (321, 4, '04/06/2025', 'BICICLETA', '1:00', '20:00', '15 km/h', '00:00', 0.0, 0.0, 0.0, 115),
-       (456, 2, '02/06/2025', 'ESTEIRA', '1:00', '00:00', 0.0, '20:00', '6 km/h', 0.0, 0.0, 120),
-       (564, 8, '08/06/2025', 'ESTEIRA', '1:00', '00:00', 0.0, '20:00', '6 km/h', 0.0, 0.0, 111),
-       (591, 10, '10/06/2025', 'ESTEIRA', '1:00', '00:00', 0.0, '20:00', '6 km/h', 0.0, 0.0, 70),
-       (654, 5, '05/06/2025', 'BICICLETA', '1:00', '20:00', '15 km/h', '00:00', 0.0, 0.0, 0.0, 123),
-       (789, 3, '03/06/2025', 'ESTEIRA', '1:00', '00:00', 0.0, '20:00', '6 km/h', 0.0, 0.0, 100),
-       (978, 9, '09/06/2025', 'ESTEIRA', '1:00', '00:00', 0.0, '20:00', '6 km/h', 0.0, 0.0, 89),
-       (987, 6, '06/06/2025', 'ESTEIRA', '1:00', '00:00', 0.0, '20:00', '6 km/h', 0.0, 0.0, 108);
+VALUES (123, 1, '01/06/2025', 'BICICLETA', '1 MINUTO', '20 MINUTOS', '15 km/h', 'NF', 'NF', 'NF', 'NF', 102),
+       (213, 7, '07/06/2025', 'BICICLETA', '1 MINUTO', '20 MINUTOS', '15 km/h', 'NF', 'NF', 'NF', 'NF', 90),
+       (321, 4, '04/06/2025', 'BICICLETA', '1 MINUTO', '20 MINUTOS', '15 km/h', 'NF', 'NF', 'NF', 'NF', 115),
+       (456, 2, '02/06/2025', 'ESTEIRA', '1 MINUTO', 'NF', 'NF', '20 MINUTOS', '6 km/h', 'NF', 'NF', 120),
+       (564, 8, '08/06/2025', 'ESTEIRA', '11 MINUTO', 'NF', 'NF', '20 MINUTOS', '6 km/h', 'NF', 'NF', 111),
+       (591, 10, '10/06/2025', 'ESTEIRA', '1 MINUTO', 'NF', 'NF', '20 MINUTOS', '6 km/h', 'NF', 'NF', 70),
+       (654, 5, '05/06/2025', 'BICICLETA', '1 MINUTO', '20 MINUTOS', '15 km/h', 'NF', 'NF', 'NF', 'NF', 123),
+       (789, 3, '03/06/2025', 'ESTEIRA', '1 MINUTO', 'NF', 'NF', '20 MINUTOS', '6 km/h', 'NF', 'NF', 100),
+       (978, 9, '09/06/2025', 'ESTEIRA', '1 MINUTO', 'NF', 'NF', '20 MINUTOS', '6 km/h', 'NF', 'NF', 89),
+       (987, 6, '06/06/2025', 'ESTEIRA', '1 MINUTO', 'NF', 'NF', '20 MINUTOS', '6 km/h', 'NF', 'NF', 108);
 
 -- 7. Crie uma consulta para relacionar todos os dados disponíveis de todos os Alunos/Clientes da academia em ordem alfabética de nome.
 
