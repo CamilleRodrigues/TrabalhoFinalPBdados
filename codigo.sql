@@ -27,6 +27,7 @@ CREATE TABLE "EXERCICIOS" ( -- Criação da tabela "EXERCICIOS"
 CREATE TABLE "TREINOS" ( -- Criação da tabela "TREINOS"
 	"ID_TREINO" INTEGER NOT NULL, -- Nome da coluna, tipo de dado e restrição.
 	"ID_GRUPO_MUSC" INTEGER NOT NULL,
+    "ID_PERSONAL" INTEGER NOT NULL,
 	PRIMARY KEY("ID_TREINO"), -- Define ID_TREINO como a chave primária.
 	FOREIGN KEY("ID_PERSONAL") REFERENCES "PERSONAL"("ID_PERSONAL"), -- ID_PERSONAL está relacionado à tabela PERSONAL. 
 	FOREIGN KEY("ID_GRUPO_MUSC") REFERENCES "EXERCICIOS"("ID_GRUPO_MUSC")); -- ID_GRUPO_MUSC está relacionado à tabela EXERCICIOS.
@@ -61,9 +62,15 @@ CREATE TABLE "AVALIACOES_FISICAS" ( -- Criação da tabela "AVALIACOES_FISICAS"
 	"COND_VEL_EST" TEXT NOT NULL,
 	"COND_TEMP_OUT" TEXT NOT NULL,
 	"COND_VEL_OUT" TEXT NOT NULL,
-	"CONTROLE_FREQ_DIAS" INTEGER NOT NULL,
 	PRIMARY KEY("ID_AVALIACAO"), -- Define ID_AVALIACAO como a chave primária.
 	FOREIGN KEY("ID_ALUNO") REFERENCES "ALUNO"("ID_ALUNO")); -- ID_ALUNO está relacionado à tabela ALUNO.  
+
+CREATE TABLE "FREQUENCIA" (
+	"ID_FREQ" INTEGER NOT NULL,
+	"ID_ALUNO" INTEGER NOT NULL,
+	"CONTROLE_FREQ_DIAS" TEXT NOT NULL,
+	PRIMARY KEY("ID_FREQ"),
+	FOREIGN KEY("ID_ALUNO") REFERENCES "ALUNO"("ID_ALUNO"));
 
 -- 6. Crie o comando SQL para inserção de pelo menos 10 registros em cada uma das tabelas necessárias. 
 
@@ -146,17 +153,17 @@ VALUES ('cross-over', 1, 'peitoral', 1, 3, 8),
        ('prancha lateral', 64, 'abdomen', 7, 4, 10),
        ('remador', 65, 'abdomen', 8, 4, 10);
 	   
-INSERT INTO TREINOS (ID_TREINO, ID_GRUPO_MUSC) 
-VALUES (21, 1),
-       (22, 2),
-       (23, 3),
-       (24, 4),
-       (25, 5),
-       (26, 6),
-       (27, 7),
-       (28, 1),
-       (29, 2),
-       (30, 3);
+INSERT INTO TREINOS (ID_TREINO, ID_GRUPO_MUSC, ID_PERSONAL) 
+VALUES (21, 1, 11),
+       (22, 2, 12),
+       (23, 3, 13),
+       (24, 4, 14),
+       (25, 5, 15),
+       (26, 6, 16),
+       (27, 7, 17),
+       (28, 1, 18),
+       (29, 2, 19),
+       (30, 3, 20);
 
 INSERT INTO ALUNO (NOME, PESO, ALTURA, PESO_META, IDADE, DATA_INICIAL, DATA_FINAL, OBJETIVO, OBSERVACOES, FREQUENCIA_TREINOS, ID_ALUNO, DURACAO_PLANEJAMENTO, ID_PERSONAL, ID_TREINO) 
 VALUES ('Camille ', 65.0, 1.65, 60.0, 23, '02/06/2025', '02/10/2025', 'Emagrecimento', 'Fazendo acompanhamento com nutricionista', '3 vezes por semana', 1, '2 meses', 16, 21),
@@ -170,23 +177,47 @@ VALUES ('Camille ', 65.0, 1.65, 60.0, 23, '02/06/2025', '02/10/2025', 'Emagrecim
        ('Leonardo', 70.0, 1.72, 75.0, 23, '10/06/2025', '10/10/2025', 'Ganho de massa muscular', 'Comem mais calorias do que gastam', '6 vezes por semana', 9, '3 meses', 13, 29), 
        ('Ana Paula', 52.0, 1.50, 57.0, 23, '11/06/2025', '11/10/2025', 'Ganho de massa muscular', 'Comem mais calorias do que gastam', '5 vezes por semana', 10, '3 meses', 14, 30);
 
-INSERT INTO AVALIACOES_FISICAS (ID_AVALIACAO, ID_ALUNO, DATA_AVALIACAO, AQUECIMENTO, PAUSA_SERIES, COND_TEMP_BIC, COND_VEL_BIC, COND_TEMP_EST, COND_VEL_EST, COND_TEMP_OUT, COND_VEL_OUT, CONTROLE_FREQ_DIAS)
-VALUES (123, 1, '01/06/2025', 'BICICLETA', '1 MINUTO', '20 MINUTOS', '15 km/h', 'NF', 'NF', 'NF', 'NF', 102),
-       (213, 7, '07/06/2025', 'BICICLETA', '1 MINUTO', '20 MINUTOS', '15 km/h', 'NF', 'NF', 'NF', 'NF', 90),
-       (321, 4, '04/06/2025', 'BICICLETA', '1 MINUTO', '20 MINUTOS', '15 km/h', 'NF', 'NF', 'NF', 'NF', 115),
-       (456, 2, '02/06/2025', 'ESTEIRA', '1 MINUTO', 'NF', 'NF', '20 MINUTOS', '6 km/h', 'NF', 'NF', 120),
-       (564, 8, '08/06/2025', 'ESTEIRA', '11 MINUTO', 'NF', 'NF', '20 MINUTOS', '6 km/h', 'NF', 'NF', 111),
-       (591, 10, '10/06/2025', 'ESTEIRA', '1 MINUTO', 'NF', 'NF', '20 MINUTOS', '6 km/h', 'NF', 'NF', 70),
-       (654, 5, '05/06/2025', 'BICICLETA', '1 MINUTO', '20 MINUTOS', '15 km/h', 'NF', 'NF', 'NF', 'NF', 123),
-       (789, 3, '03/06/2025', 'ESTEIRA', '1 MINUTO', 'NF', 'NF', '20 MINUTOS', '6 km/h', 'NF', 'NF', 100),
-       (978, 9, '09/06/2025', 'ESTEIRA', '1 MINUTO', 'NF', 'NF', '20 MINUTOS', '6 km/h', 'NF', 'NF', 89),
-       (987, 6, '06/06/2025', 'ESTEIRA', '1 MINUTO', 'NF', 'NF', '20 MINUTOS', '6 km/h', 'NF', 'NF', 108);
+INSERT INTO AVALIACOES_FISICAS (ID_AVALIACAO, ID_ALUNO, DATA_AVALIACAO, AQUECIMENTO, PAUSA_SERIES, COND_TEMP_BIC, COND_VEL_BIC, COND_TEMP_EST, COND_VEL_EST, COND_TEMP_OUT, COND_VEL_OUT)
+VALUES (123, 1, '01/06/2025', 'BICICLETA', '1 MINUTO', '20 MINUTOS', '15 km/h', 'NF', 'NF', 'NF', 'NF'),
+       (213, 7, '07/06/2025', 'BICICLETA', '1 MINUTO', '20 MINUTOS', '15 km/h', 'NF', 'NF', 'NF', 'NF'),
+       (321, 4, '04/06/2025', 'BICICLETA', '1 MINUTO', '20 MINUTOS', '15 km/h', 'NF', 'NF', 'NF', 'NF'),
+       (456, 2, '02/06/2025', 'ESTEIRA', '1 MINUTO', 'NF', 'NF', '20 MINUTOS', '6 km/h', 'NF', 'NF'),
+       (564, 8, '08/06/2025', 'ESTEIRA', '11 MINUTO', 'NF', 'NF', '20 MINUTOS', '6 km/h', 'NF', 'NF'),
+       (591, 10, '10/06/2025', 'ESTEIRA', '1 MINUTO', 'NF', 'NF', '20 MINUTOS', '6 km/h', 'NF', 'NF'),
+       (654, 5, '05/06/2025', 'BICICLETA', '1 MINUTO', '20 MINUTOS', '15 km/h', 'NF', 'NF', 'NF', 'NF'),
+       (789, 3, '03/06/2025', 'ESTEIRA', '1 MINUTO', 'NF', 'NF', '20 MINUTOS', '6 km/h', 'NF', 'NF'),
+       (978, 9, '09/06/2025', 'ESTEIRA', '1 MINUTO', 'NF', 'NF', '20 MINUTOS', '6 km/h', 'NF', 'NF'),
+       (987, 6, '06/06/2025', 'ESTEIRA', '1 MINUTO', 'NF', 'NF', '20 MINUTOS', '6 km/h', 'NF', 'NF');
 
+INSERT INTO FREQUENCIA (ID_FREQ, ID_ALUNO, CONTROLE_FREQ_DIAS)
+VALUES (100, 1, '10/06/2025'),
+       (101, 1, '15/06/2025'),
+	   (102, 2, '20/06/2025'),
+	   (103, 3, '12/06/2025'),
+	   (104, 4, '16/06/2025'),
+	   (105, 5, '19/06/2025'),
+	   (106, 6, '22/06/2025'),
+	   (107, 7, '22/06/2025'),
+	   (108, 8, '11/06/2025'),
+	   (109, 9, '19/06/2025'),
+	   (110, 10, '25/06/2025');
+	   
 -- 7. Crie uma consulta para relacionar todos os dados disponíveis de todos os Alunos/Clientes da academia em ordem alfabética de nome.
 
 SELECT * -- Seleciona todas as colunas da tabela.
 FROM ALUNO -- os dados irão vir da tabela ALUNO.
 ORDER BY NOME ASC; -- Ordena os resultados da coluna NOME e coloca em ordem crescente.
+
+-- 8. Crie uma consulta para listar todos os registros de frequência de um aluno específico, ordenados por data. 
+
+SELECT 
+    A.NOME,                  -- Nome do aluno
+    F.ID_FREQ,               -- ID do registro de frequência
+    F.CONTROLE_FREQ_DIAS     -- Data da frequência
+FROM FREQUENCIA AS F
+JOIN ALUNO AS A ON F.ID_ALUNO = A.ID_ALUNO
+WHERE A.ID_ALUNO = 4         -- Aqui definimos o aluno (ex: ID_ALUNO = 1)
+ORDER BY F.CONTROLE_FREQ_DIAS ASC;
 
 -- 9. Crie uma consulta para listar todas as avaliações físicas de alunos realizadas, ordenadas por data de avaliação. 
 
