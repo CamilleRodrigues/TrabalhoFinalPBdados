@@ -28,6 +28,7 @@ CREATE TABLE "TREINOS" ( -- Criação da tabela "TREINOS"
 	"ID_TREINO" INTEGER NOT NULL, -- Nome da coluna, tipo de dado e restrição.
 	"ID_GRUPO_MUSC" INTEGER NOT NULL,
 	PRIMARY KEY("ID_TREINO"), -- Define ID_TREINO como a chave primária.
+	FOREIGN KEY("ID_PERSONAL") REFERENCES "PERSONAL"("ID_PERSONAL"), -- ID_PERSONAL está relacionado à tabela PERSONAL. 
 	FOREIGN KEY("ID_GRUPO_MUSC") REFERENCES "EXERCICIOS"("ID_GRUPO_MUSC")); -- ID_GRUPO_MUSC está relacionado à tabela EXERCICIOS.
 
 CREATE TABLE "ALUNO" ( -- Criação da tabela "ALUNO"
@@ -45,8 +46,7 @@ CREATE TABLE "ALUNO" ( -- Criação da tabela "ALUNO"
 	"DURACAO_PLANEJAMENTO" TEXT NOT NULL,
 	"ID_PERSONAL" INTEGER NOT NULL,
 	"ID_TREINO" INTEGER,
-	PRIMARY KEY("ID_ALUNO"), -- Define ID_ALUNO como a chave primária.
-	FOREIGN KEY("ID_PERSONAL") REFERENCES "PERSONAL"("ID_PERSONAL"), -- ID_PERSONAL está relacionado à tabela PERSONAL.  
+	PRIMARY KEY("ID_ALUNO"), -- Define ID_ALUNO como a chave primária. 
 	FOREIGN KEY("ID_TREINO") REFERENCES "TREINOS"("ID_TREINO")); -- ID_TREINO está relacionado à tabela TREINO.  
 
 CREATE TABLE "AVALIACOES_FISICAS" ( -- Criação da tabela "AVALIACOES_FISICAS"
