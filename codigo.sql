@@ -6,7 +6,7 @@
 
 -- 4. Crie o comando SQL para a criação do banco de dados ACADEMIA.
 
-CREATE DATABASE ACADEMIA; -- Criação do banco de dados ACADEMIA.
+-- CREATE DATABASE ACADEMIA; -- Criação do banco de dados ACADEMIA. Não é necessário o CREATE DATABASE, pois estamos utilizando o SQLite. Para criar um banco de dados, basta criar um arquivo DB (extensão).
 
 -- 5. Crie o comando SQL para a criação das tabelas solicitadas (exercícios, alunos, avaliações, frequência). 
 
@@ -66,18 +66,6 @@ CREATE TABLE "AVALIACOES_FISICAS" ( -- Criação da tabela "AVALIACOES_FISICAS"
 	FOREIGN KEY("ID_ALUNO") REFERENCES "ALUNO"("ID_ALUNO")); -- ID_ALUNO está relacionado à tabela ALUNO.  
 
 -- 6. Crie o comando SQL para inserção de pelo menos 10 registros em cada uma das tabelas necessárias. 
-
-INSERT INTO AVALIACOES_FISICAS (ID_AVALIACAO, ID_ALUNO, DATA_AVALIACAO, AQUECIMENTO, PAUSA_SERIES, COND_TEMP_BIC, COND_VEL_BIC, COND_TEMP_EST, COND_VEL_EST, COND_TEMP_OUT, COND_VEL_OUT, CONTROLE_FREQ_DIAS)
-VALUES (123, 1, '01/06/2025', 'BICICLETA', '1:00', '20:00', '15 km/h', '00:00', 0.0, 0.0, 0.0, 102),
-       (213, 7, '07/06/2025', 'BICICLETA', '1:00', '20:00', '15 km/h', '00:00', 0.0, 0.0, 0.0, 90),
-       (321, 4, '04/06/2025', 'BICICLETA', '1:00', '20:00', '15 km/h', '00:00', 0.0, 0.0, 0.0, 115),
-       (456, 2, '02/06/2025', 'ESTEIRA', '1:00', '00:00', 0.0, '20:00', '6 km/h', 0.0, 0.0, 120),
-       (564, 8, '08/06/2025', 'ESTEIRA', '1:00', '00:00', 0.0, '20:00', '6 km/h', 0.0, 0.0, 111),
-       (591, 10, '10/06/2025', 'ESTEIRA', '1:00', '00:00', 0.0, '20:00', '6 km/h', 0.0, 0.0, 70),
-       (654, 5, '05/06/2025', 'BICICLETA', '1:00', '20:00', '15 km/h', '00:00', 0.0, 0.0, 0.0, 123),
-       (789, 3, '03/06/2025', 'ESTEIRA', '1:00', '00:00', 0.0, '20:00', '6 km/h', 0.0, 0.0, 100),
-       (978, 9, '09/06/2025', 'ESTEIRA', '1:00', '00:00', 0.0, '20:00', '6 km/h', 0.0, 0.0, 89),
-       (987, 6, '06/06/2025', 'ESTEIRA', '1:00', '00:00', 0.0, '20:00', '6 km/h', 0.0, 0.0, 108);
 
 INSERT INTO PERSONAL (NOME, ID_PERSONAL) 
 VALUES ('Julia', 11),
@@ -157,7 +145,7 @@ VALUES ('cross-over', 1, 'peitoral', 1, 3, 8),
        ('prancha', 63, 'abdomen', 6, 4, 10),
        ('prancha lateral', 64, 'abdomen', 7, 4, 10),
        ('remador', 65, 'abdomen', 8, 4, 10);
-
+	   
 INSERT INTO TREINOS (ID_TREINO, ID_GRUPO_MUSC) 
 VALUES (21, 1),
        (22, 2),
@@ -181,6 +169,18 @@ VALUES ('Camille ', 65.0, '1.65', 60.0, 23, '02/06/2025', '02/10/2025', 'Emagrec
        ('Marcos', 70.0, '1.70', 70.0, 55, '09/06/2025', '09/10/2025', 'Manter o peso', '-', '2 vezes por semana ', 8, '4 meses', 19, 28),
        ('Leonardo', 70.0, '1.72', 75.0, 23, '10/06/2025', '10/10/2025', 'Ganho de massa muscular', 'Comem mais calorias do que gastam', '6 vezes por semana', 9, '3 meses', 13, 29), 
        ('Ana Paula', 52.0, '1.50', 57.0, 23, '11/06/2025', '11/10/2025', 'Ganho de massa muscular', 'Comem mais calorias do que gastam', '5 vezes por semana', 10, '3 meses', 14, 30);
+
+INSERT INTO AVALIACOES_FISICAS (ID_AVALIACAO, ID_ALUNO, DATA_AVALIACAO, AQUECIMENTO, PAUSA_SERIES, COND_TEMP_BIC, COND_VEL_BIC, COND_TEMP_EST, COND_VEL_EST, COND_TEMP_OUT, COND_VEL_OUT, CONTROLE_FREQ_DIAS)
+VALUES (123, 1, '01/06/2025', 'BICICLETA', '1:00', '20:00', '15 km/h', '00:00', 0.0, 0.0, 0.0, 102),
+       (213, 7, '07/06/2025', 'BICICLETA', '1:00', '20:00', '15 km/h', '00:00', 0.0, 0.0, 0.0, 90),
+       (321, 4, '04/06/2025', 'BICICLETA', '1:00', '20:00', '15 km/h', '00:00', 0.0, 0.0, 0.0, 115),
+       (456, 2, '02/06/2025', 'ESTEIRA', '1:00', '00:00', 0.0, '20:00', '6 km/h', 0.0, 0.0, 120),
+       (564, 8, '08/06/2025', 'ESTEIRA', '1:00', '00:00', 0.0, '20:00', '6 km/h', 0.0, 0.0, 111),
+       (591, 10, '10/06/2025', 'ESTEIRA', '1:00', '00:00', 0.0, '20:00', '6 km/h', 0.0, 0.0, 70),
+       (654, 5, '05/06/2025', 'BICICLETA', '1:00', '20:00', '15 km/h', '00:00', 0.0, 0.0, 0.0, 123),
+       (789, 3, '03/06/2025', 'ESTEIRA', '1:00', '00:00', 0.0, '20:00', '6 km/h', 0.0, 0.0, 100),
+       (978, 9, '09/06/2025', 'ESTEIRA', '1:00', '00:00', 0.0, '20:00', '6 km/h', 0.0, 0.0, 89),
+       (987, 6, '06/06/2025', 'ESTEIRA', '1:00', '00:00', 0.0, '20:00', '6 km/h', 0.0, 0.0, 108);
 
 -- 7. Crie uma consulta para relacionar todos os dados disponíveis de todos os Alunos/Clientes da academia em ordem alfabética de nome.
 
